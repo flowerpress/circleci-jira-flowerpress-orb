@@ -1,0 +1,62 @@
+description: >
+  Call this command to send a build or deployment notification to Jira
+
+parameters:
+  job_type:
+    type: enum
+    enum:
+      - build
+      - deployment
+    default: build
+
+steps:
+  - when:
+      condition:
+        or:
+          - equal: [ develop, << pipeline.git.branch >> ]
+      steps:
+        - notify-jira-send:
+            job_type: << parameters.job_type >>
+            environment_type: development
+
+  - when:
+      condition:
+        or:
+          - equal: [ qa, << pipeline.git.branch >> ]
+      steps:
+        - notify-jira-send:
+            job_type: << parameters.job_type >>
+            environment_type: testing
+
+  - when:
+      condition:
+        or:
+          - equal: [ staging, << pipeline.git.branch >> ]
+      steps:
+        - notify-jira-send:
+            job_type: << parameters.job_type >>
+            environment_type: staging
+
+  - when:
+      condition:
+        or:
+          - equal: [ main, << pipeline.git.branch >> ]
+          - equal: [ master, << pipeline.git.branch >> ]
+      steps:
+        - notify-jira-send:
+            job_type: << parameters.job_type >>
+            environment_type: production
+
+  - when:
+      condition:
+        not:
+          or:
+            - equal: [ develop, << pipeline.git.branch >> ]
+            - equal: [ qa, << pipeline.git.branch >> ]
+            - equal: [ staging, << pipeline.git.branch >> ]
+            - equal: [ main, << pipeline.git.branch >> ]
+            - equal: [ master, << pipeline.git.branch >> ]
+      steps:
+        - notify-jira-send:
+            job_type: << parameters.job_type >>
+            environment_type: unmapped

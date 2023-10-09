@@ -1,0 +1,40 @@
+description: >
+  Do not call this command directly. Used internally by `notify`
+
+parameters:
+  job_type:
+    type: enum
+    enum:
+      - build
+      - deployment
+    default: build
+  environment_type:
+    type: enum
+    enum:
+      - production
+      - staging
+      - testing
+      - development
+      - unmapped
+    default: unmapped
+
+steps:
+  - when:
+      condition:
+        equal: [ build, << parameters.job_type >> ]
+      steps:
+        - jira/notify:
+            job_type: << parameters.job_type >>
+            pipeline_id: << pipeline.id >>
+            pipeline_number: << pipeline.number >> # ignore the error/warning about this needing to be an integer
+
+  - when:
+      condition:
+        equal: [ deployment, << parameters.job_type >> ]
+      steps:
+        - jira/notify:
+            job_type: << parameters.job_type >>
+            environment: << pipeline.git.branch >>
+            environment_type: << parameters.environment_type >>
+            pipeline_id: << pipeline.id >>
+            pipeline_number: << pipeline.number >> # ignore the error/warning about this needing to be an integer
