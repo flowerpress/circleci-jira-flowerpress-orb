@@ -1,10 +1,9 @@
 # FPCS CircleCI Orb for Jira
 
 
-[![CircleCI Build Status](https://circleci.com/gh/mattrabe/circleci-jira-flowerpress-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/mattrabe/circleci-jira-flowerpress-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/fpcs/jira-flowerpress.svg)](https://circleci.com/developer/orbs/orb/fpcs/jira-flowerpress) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/mattrabe/circleci-jira-flowerpress-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
+[![CircleCI Build Status](https://circleci.com/gh/flowerpress/circleci-jira-flowerpress-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/flowerpress/circleci-jira-flowerpress-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/fpcs/jira-flowerpress.svg)](https://circleci.com/developer/orbs/orb/fpcs/jira-flowerpress) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/flowerpress/circleci-jira-flowerpress-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
-
-Interface for circleci/jira orb, which applies sane defaults
+FPCS interface for the official circleci/jira orb - applies sane defaults for things like `environment_type`.
 
 ---
 
@@ -13,10 +12,6 @@ Interface for circleci/jira orb, which applies sane defaults
 [CircleCI Orb Registry Page](https://circleci.com/developer/orbs/orb/fpcs/jira-flowerpress) - The official registry page of this orb for all versions, executors, commands, and jobs described.
 
 [CircleCI Orb Docs](https://circleci.com/docs/orb-intro/#section=configuration) - Docs for using, creating, and publishing CircleCI Orbs.
-
-### How to Contribute
-
-We welcome [issues](https://github.com/mattrabe/circleci-jira-flowerpress-orb/issues) to and [pull requests](https://github.com/mattrabe/circleci-jira-flowerpress-orb/pulls) against this repository!
 
 ### How to Publish An Update
 1. Merge pull requests with desired changes to the main branch.
