@@ -5,6 +5,10 @@ parameters:
   branch:
     description: Name of the branch that was built or deployed.
     type: string
+  debug:
+    description: "Enable additional logging if you are running into issues. A log will be generated at '/tmp/circleci_jira.log'."
+    type: boolean
+    default: false
   job_type:
     type: enum
     enum:
@@ -30,6 +34,7 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: development
             pipeline_id: << parameters.pipeline_id >>
@@ -43,6 +48,7 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: testing
             pipeline_id: << parameters.pipeline_id >>
@@ -56,6 +62,7 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: staging
             pipeline_id: << parameters.pipeline_id >>
@@ -70,6 +77,7 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: production
             pipeline_id: << parameters.pipeline_id >>
@@ -88,6 +96,7 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: unmapped
             pipeline_id: << parameters.pipeline_id >>
