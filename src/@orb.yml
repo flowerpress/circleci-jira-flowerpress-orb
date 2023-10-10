@@ -8,4 +8,4 @@ display:
   source_url: "https://github.com/flowerpress/circleci-jira-flowerpress-orb"
 
 orbs:
-  jira: fpcs/jira@2.0.2
+  jira: circleci/jira@2.0.2
