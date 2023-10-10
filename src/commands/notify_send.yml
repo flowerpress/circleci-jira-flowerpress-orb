@@ -19,6 +19,12 @@ parameters:
       - build
       - deployment
     default: build
+  pipeline_id:
+    type: string
+    default: test
+  pipeline_number:
+    type: integer
+    default: 1
 
 steps:
   - when:
@@ -27,8 +33,8 @@ steps:
       steps:
         - jira/notify:
             job_type: << parameters.job_type >>
-            pipeline_id: << pipeline.id >>
-            pipeline_number: << pipeline.number >> # ignore the error/warning about this needing to be an integer
+            pipeline_id: << parameters.pipeline_id >>
+            pipeline_number: << parameters.pipeline_number >>
 
   - when:
       condition:
@@ -38,5 +44,5 @@ steps:
             job_type: << parameters.job_type >>
             environment: << parameters.branch >>
             environment_type: << parameters.environment_type >>
-            pipeline_id: << pipeline.id >>
-            pipeline_number: << pipeline.number >> # ignore the error/warning about this needing to be an integer
+            pipeline_id: << parameters.pipeline_id >>
+            pipeline_number: << parameters.pipeline_number >>
