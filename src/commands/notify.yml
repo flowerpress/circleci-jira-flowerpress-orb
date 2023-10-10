@@ -11,6 +11,10 @@ parameters:
       - build
       - deployment
     default: build
+  webhook_url:
+    description: Get your webhook URL from the management panel in the CircleCI for Jira app in Atlassian.
+    type: string
+    default: "${JIRA_WEBHOOK_URL}"
 
 steps:
   - when:
@@ -22,6 +26,7 @@ steps:
             branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: development
+            webhook_url: << parameters.webhook_url >>
 
   - when:
       condition:
@@ -32,6 +37,7 @@ steps:
             branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: testing
+            webhook_url: << parameters.webhook_url >>
 
   - when:
       condition:
@@ -42,6 +48,7 @@ steps:
             branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: staging
+            webhook_url: << parameters.webhook_url >>
 
   - when:
       condition:
@@ -53,6 +60,7 @@ steps:
             branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: production
+            webhook_url: << parameters.webhook_url >>
 
   - when:
       condition:
@@ -68,3 +76,4 @@ steps:
             branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: unmapped
+            webhook_url: << parameters.webhook_url >>

@@ -25,6 +25,8 @@ parameters:
   pipeline_number:
     type: integer
     default: 1
+  webhook_url:
+    type: string
 
 steps:
   - when:
@@ -35,6 +37,7 @@ steps:
             job_type: << parameters.job_type >>
             pipeline_id: << parameters.pipeline_id >>
             pipeline_number: << parameters.pipeline_number >>
+            webhook_url: << parameters.webhook_url >>
 
   - when:
       condition:
@@ -46,3 +49,4 @@ steps:
             environment_type: << parameters.environment_type >>
             pipeline_id: << parameters.pipeline_id >>
             pipeline_number: << parameters.pipeline_number >>
+            webhook_url: << parameters.webhook_url >>
