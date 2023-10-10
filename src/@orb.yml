@@ -1,9 +1,8 @@
 version: 2.1
 
 description: >
-  Interface for circleci/jira orb, which applies sane defaults
+  Interface for circleci/jira orb, which applies sane defaults used by FPCS.
 
-# This information will be displayed in the orb registry and is not mandatory.
 display:
   home_url: "https://github.com/flowerpress/circleci-jira-flowerpress-orb"
   source_url: "https://github.com/flowerpress/circleci-jira-flowerpress-orb"
