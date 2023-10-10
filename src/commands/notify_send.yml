@@ -21,10 +21,8 @@ parameters:
     default: build
   pipeline_id:
     type: string
-    default: test
   pipeline_number:
     type: integer
-    default: 1
   webhook_url:
     type: string
 
