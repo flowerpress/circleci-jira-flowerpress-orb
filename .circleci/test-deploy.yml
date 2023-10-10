@@ -28,11 +28,11 @@ jobs:
     steps:
       - checkout
 
-      - jira-flowerpress/notify
+      - jira-flowerpress/notify:
           branch: << pipeline.git.branch >>
           job_type: build
 
-      - jira-flowerpress/notify
+      - jira-flowerpress/notify:
           branch: << pipeline.git.branch >>
           job_type: deployment
 workflows:
