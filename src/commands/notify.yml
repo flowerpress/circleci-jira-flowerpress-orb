@@ -5,12 +5,22 @@ parameters:
   branch:
     description: Name of the branch that was built or deployed.
     type: string
+  debug:
+    description: "Enable additional logging if you are running into issues. A log will be generated at '/tmp/circleci_jira.log'."
+    type: boolean
+    default: false
   job_type:
     type: enum
     enum:
       - build
       - deployment
     default: build
+  pipeline_id:
+    description: Pass in the pipeline id via CircleCI pipeline parameters. This must be specified manually. Refer to usage example.
+    type: string
+  pipeline_number:
+    description: Pass in the pipeline number via CircleCI pipeline parameters. This must be specified manually. Refer to usage example.
+    type: integer
   webhook_url:
     description: Get your webhook URL from the management panel in the CircleCI for Jira app in Atlassian.
     type: string
@@ -24,8 +34,11 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: development
+            pipeline_id: << parameters.pipeline_id >>
+            pipeline_number: << parameters.pipeline_number >>
             webhook_url: << parameters.webhook_url >>
 
   - when:
@@ -35,8 +48,11 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: testing
+            pipeline_id: << parameters.pipeline_id >>
+            pipeline_number: << parameters.pipeline_number >>
             webhook_url: << parameters.webhook_url >>
 
   - when:
@@ -46,8 +62,11 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: staging
+            pipeline_id: << parameters.pipeline_id >>
+            pipeline_number: << parameters.pipeline_number >>
             webhook_url: << parameters.webhook_url >>
 
   - when:
@@ -58,8 +77,11 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: production
+            pipeline_id: << parameters.pipeline_id >>
+            pipeline_number: << parameters.pipeline_number >>
             webhook_url: << parameters.webhook_url >>
 
   - when:
@@ -74,6 +96,9 @@ steps:
       steps:
         - notify_send:
             branch: << parameters.branch >>
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             environment_type: unmapped
+            pipeline_id: << parameters.pipeline_id >>
+            pipeline_number: << parameters.pipeline_number >>
             webhook_url: << parameters.webhook_url >>

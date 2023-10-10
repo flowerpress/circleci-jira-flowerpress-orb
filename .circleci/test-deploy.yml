@@ -30,12 +30,18 @@ jobs:
 
       - jira-flowerpress/notify:
           branch: test
+          debug: true
           job_type: build
+          pipeline_id: "<< pipeline.id >>"
+          pipeline_number: "<< pipeline.number >>"
           webhook_url: https://circleci.com/ # This is an invalid URL, so the post will fail, but be ignored.
 
       - jira-flowerpress/notify:
           branch: test
+          debug: true
           job_type: deployment
+          pipeline_id: "<< pipeline.id >>"
+          pipeline_number: "<< pipeline.number >>"
           webhook_url: https://circleci.com/ # This is an invalid URL, so the post will fail, but be ignored.
 
 workflows:

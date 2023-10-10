@@ -14,6 +14,8 @@ usage:
               - jira/notify:
                   branch: << pipeline.git.branch >>
                   job_type: build
+                  pipeline_id: << pipeline.id >>
+                  pipeline_number: << pipeline.number >>
         - deploy-backend:
             context: JIRA
             requires:
@@ -22,3 +24,5 @@ usage:
               - jira/notify:
                   branch: << pipeline.git.branch >>
                   job_type: deployment
+                  pipeline_id: << pipeline.id >>
+                  pipeline_number: << pipeline.number >>
