@@ -1,0 +1,79 @@
+description: >
+  Call this command to send a build or deployment notification to Jira
+
+parameters:
+  branch:
+    description: Name of the branch that was built or deployed.
+    type: string
+  job_type:
+    type: enum
+    enum:
+      - build
+      - deployment
+    default: build
+  webhook_url:
+    description: Get your webhook URL from the management panel in the CircleCI for Jira app in Atlassian.
+    type: string
+    default: "${JIRA_WEBHOOK_URL}"
+
+steps:
+  - when:
+      condition:
+        or:
+          - equal: [ develop, << parameters.branch >> ]
+      steps:
+        - notify_send:
+            branch: << parameters.branch >>
+            job_type: << parameters.job_type >>
+            environment_type: development
+            webhook_url: << parameters.webhook_url >>
+
+  - when:
+      condition:
+        or:
+          - equal: [ qa, << parameters.branch >> ]
+      steps:
+        - notify_send:
+            branch: << parameters.branch >>
+            job_type: << parameters.job_type >>
+            environment_type: testing
+            webhook_url: << parameters.webhook_url >>
+
+  - when:
+      condition:
+        or:
+          - equal: [ staging, << parameters.branch >> ]
+      steps:
+        - notify_send:
+            branch: << parameters.branch >>
+            job_type: << parameters.job_type >>
+            environment_type: staging
+            webhook_url: << parameters.webhook_url >>
+
+  - when:
+      condition:
+        or:
+          - equal: [ main, << parameters.branch >> ]
+          - equal: [ master, << parameters.branch >> ]
+      steps:
+        - notify_send:
+            branch: << parameters.branch >>
+            job_type: << parameters.job_type >>
+            environment_type: production
+            webhook_url: << parameters.webhook_url >>
+
+  - when:
+      condition:
+        not:
+          or:
+            - equal: [ develop, << parameters.branch >> ]
+            - equal: [ qa, << parameters.branch >> ]
+            - equal: [ staging, << parameters.branch >> ]
+            - equal: [ main, << parameters.branch >> ]
+            - equal: [ master, << parameters.branch >> ]
+      steps:
+        - notify_send:
+            branch: << parameters.branch >>
+            job_type: << parameters.job_type >>
+            environment_type: unmapped
+            webhook_url: << parameters.webhook_url >>

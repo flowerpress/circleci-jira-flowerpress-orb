@@ -1,0 +1,52 @@
+description: >
+  Do not call this command directly. Used internally by `notify`
+
+parameters:
+  branch:
+    type: string
+  environment_type:
+    type: enum
+    enum:
+      - production
+      - staging
+      - testing
+      - development
+      - unmapped
+    default: unmapped
+  job_type:
+    type: enum
+    enum:
+      - build
+      - deployment
+    default: build
+  pipeline_id:
+    type: string
+    default: test
+  pipeline_number:
+    type: integer
+    default: 1
+  webhook_url:
+    type: string
+
+steps:
+  - when:
+      condition:
+        equal: [ build, << parameters.job_type >> ]
+      steps:
+        - jira/notify:
+            job_type: << parameters.job_type >>
+            pipeline_id: << parameters.pipeline_id >>
+            pipeline_number: << parameters.pipeline_number >>
+            webhook_url: << parameters.webhook_url >>
+
+  - when:
+      condition:
+        equal: [ deployment, << parameters.job_type >> ]
+      steps:
+        - jira/notify:
+            job_type: << parameters.job_type >>
+            environment: << parameters.branch >>
+            environment_type: << parameters.environment_type >>
+            pipeline_id: << parameters.pipeline_id >>
+            pipeline_number: << parameters.pipeline_number >>
+            webhook_url: << parameters.webhook_url >>
