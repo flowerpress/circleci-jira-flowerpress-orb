@@ -19,6 +19,7 @@ steps:
           - equal: [ develop, << parameters.branch >> ]
       steps:
         - notify_send:
+            branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: development
 
@@ -28,6 +29,7 @@ steps:
           - equal: [ qa, << parameters.branch >> ]
       steps:
         - notify_send:
+            branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: testing
 
@@ -37,6 +39,7 @@ steps:
           - equal: [ staging, << parameters.branch >> ]
       steps:
         - notify_send:
+            branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: staging
 
@@ -47,6 +50,7 @@ steps:
           - equal: [ master, << parameters.branch >> ]
       steps:
         - notify_send:
+            branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: production
 
@@ -61,5 +65,6 @@ steps:
             - equal: [ master, << parameters.branch >> ]
       steps:
         - notify_send:
+            branch: << parameters.branch >>
             job_type: << parameters.job_type >>
             environment_type: unmapped
