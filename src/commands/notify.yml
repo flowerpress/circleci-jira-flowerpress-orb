@@ -2,6 +2,9 @@ description: >
   Call this command to send a build or deployment notification to Jira
 
 parameters:
+  branch:
+    type: string
+    default: << pipeline.git.branch >>
   job_type:
     type: enum
     enum:
@@ -13,7 +16,7 @@ steps:
   - when:
       condition:
         or:
-          - equal: [ develop, << pipeline.git.branch >> ]
+          - equal: [ develop, << parameters.branch >> ]
       steps:
         - notify_send:
             job_type: << parameters.job_type >>
@@ -22,7 +25,7 @@ steps:
   - when:
       condition:
         or:
-          - equal: [ qa, << pipeline.git.branch >> ]
+          - equal: [ qa, << parameters.branch >> ]
       steps:
         - notify_send:
             job_type: << parameters.job_type >>
@@ -31,7 +34,7 @@ steps:
   - when:
       condition:
         or:
-          - equal: [ staging, << pipeline.git.branch >> ]
+          - equal: [ staging, << parameters.branch >> ]
       steps:
         - notify_send:
             job_type: << parameters.job_type >>
@@ -40,8 +43,8 @@ steps:
   - when:
       condition:
         or:
-          - equal: [ main, << pipeline.git.branch >> ]
-          - equal: [ master, << pipeline.git.branch >> ]
+          - equal: [ main, << parameters.branch >> ]
+          - equal: [ master, << parameters.branch >> ]
       steps:
         - notify_send:
             job_type: << parameters.job_type >>
@@ -51,11 +54,11 @@ steps:
       condition:
         not:
           or:
-            - equal: [ develop, << pipeline.git.branch >> ]
-            - equal: [ qa, << pipeline.git.branch >> ]
-            - equal: [ staging, << pipeline.git.branch >> ]
-            - equal: [ main, << pipeline.git.branch >> ]
-            - equal: [ master, << pipeline.git.branch >> ]
+            - equal: [ develop, << parameters.branch >> ]
+            - equal: [ qa, << parameters.branch >> ]
+            - equal: [ staging, << parameters.branch >> ]
+            - equal: [ main, << parameters.branch >> ]
+            - equal: [ master, << parameters.branch >> ]
       steps:
         - notify_send:
             job_type: << parameters.job_type >>
