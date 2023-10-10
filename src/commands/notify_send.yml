@@ -4,6 +4,8 @@ description: >
 parameters:
   branch:
     type: string
+  debug:
+    type: boolean
   environment_type:
     type: enum
     enum:
@@ -32,6 +34,7 @@ steps:
         equal: [ build, << parameters.job_type >> ]
       steps:
         - jira/notify:
+            debug: << parameters.debug >>
             job_type: << parameters.job_type >>
             pipeline_id: << parameters.pipeline_id >>
             pipeline_number: << parameters.pipeline_number >>
@@ -42,9 +45,10 @@ steps:
         equal: [ deployment, << parameters.job_type >> ]
       steps:
         - jira/notify:
-            job_type: << parameters.job_type >>
+            debug: << parameters.debug >>
             environment: << parameters.branch >>
             environment_type: << parameters.environment_type >>
+            job_type: << parameters.job_type >>
             pipeline_id: << parameters.pipeline_id >>
             pipeline_number: << parameters.pipeline_number >>
             webhook_url: << parameters.webhook_url >>
