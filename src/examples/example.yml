@@ -4,7 +4,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    jira: fpcs/jira-flowerpress@0.0.1
+    jira: fpcs/jira-flowerpress@0.0.3
   workflows:
     deploy-apps:
       jobs:
@@ -12,6 +12,7 @@ usage:
             context: JIRA
             post-steps:
               - jira/notify:
+                  branch: << pipeline.git.branch >>
                   job_type: build
         - deploy-backend:
             context: JIRA
@@ -19,4 +20,5 @@ usage:
               - install
             post-steps:
               - jira/notify:
+                  branch: << pipeline.git.branch >>
                   job_type: deployment

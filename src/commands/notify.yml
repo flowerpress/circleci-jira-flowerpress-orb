@@ -3,8 +3,8 @@ description: >
 
 parameters:
   branch:
+    description: Name of the branch that was built or deployed.
     type: string
-    default: << pipeline.git.branch >>
   job_type:
     type: enum
     enum:
