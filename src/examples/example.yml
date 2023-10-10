@@ -4,7 +4,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    jira: fpcs/jira-flowerpress@0.0.5
+    jira: fpcs/jira-flowerpress@0.0.6
   workflows:
     deploy-apps:
       jobs:
