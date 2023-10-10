@@ -31,10 +31,13 @@ jobs:
       - jira-flowerpress/notify:
           branch: test
           job_type: build
+          webhook_url: https://circleci.com/ # This is an invalid URL, so the post will fail, but be ignored.
 
       - jira-flowerpress/notify:
           branch: test
           job_type: deployment
+          webhook_url: https://circleci.com/ # This is an invalid URL, so the post will fail, but be ignored.
+
 workflows:
   test-deploy:
     jobs:
