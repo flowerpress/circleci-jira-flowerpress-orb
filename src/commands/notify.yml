@@ -5,6 +5,7 @@ parameters:
   branch:
     description: Name of the branch that was built or deployed.
     type: string
+    default: ''
   debug:
     description: "Enable additional logging if you are running into issues. A log will be generated at '/tmp/circleci_jira.log'."
     type: boolean
@@ -86,8 +87,17 @@ steps:
 
   - when:
       condition:
+        or:
+          - equal: [ "", << parameters.branch >> ]
+      steps:
+        - run:
+            command: echo "❌ No branch name, skipping Jira notification."
+
+  - when:
+      condition:
         not:
           or:
+            - equal: [ "", << parameters.branch >> ]
             - equal: [ develop, << parameters.branch >> ]
             - equal: [ qa, << parameters.branch >> ]
             - equal: [ staging, << parameters.branch >> ]
