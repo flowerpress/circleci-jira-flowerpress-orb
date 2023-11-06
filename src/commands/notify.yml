@@ -91,6 +91,7 @@ steps:
           - equal: [ "", << parameters.branch >> ]
       steps:
         - run:
+            name: "No branch name, skipping Jira notification."
             command: echo "❌ No branch name, skipping Jira notification."
 
   - when:
